@@ -7,7 +7,20 @@
         android:layout_height="match_parent"
         android:padding="16dp"
         tools:context=".MainActivity"
-        android:background="@drawable/background_gradient"> <!-- Background gradient -->
+        android:background="@drawable/background_gradient">
+
+        <!-- Title TextView -->
+        <TextView
+            android:id="@+id/app_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lori's Inspirational Quotes"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:padding="16dp" />
 
         <!-- CardView for Quote or Loading Spinner -->
         <androidx.cardview.widget.CardView
@@ -33,8 +46,8 @@
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:visibility="gone"
-                android.fontFamily="sans-serif-cursive"
-            android:padding="16dp" />
+                android:fontFamily="sans-serif-cursive"
+                android:padding="16dp" />
         </androidx.cardview.widget.CardView>
 
         <!-- Instructional Text -->
@@ -46,7 +59,7 @@
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textStyle="italic"
-            android:text="Swipe left on the card to load the next quote. All inspirational quotes provided by Lori Jones-Harden."
+            android:text="Swipe left on the card to load the next quote (coming soon). All inspirational quotes provided by Lori Jones-Harden."
             android:layout_below="@id/quote_card"
             android:layout_marginTop="16dp" />
 
