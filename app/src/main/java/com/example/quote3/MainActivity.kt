@@ -1,15 +1,18 @@
-package com.example.inspirationalquotes
+package com.example.quote3
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.example.inspirationalquotes.DatabaseHelper // Import DatabaseHelper from its correct package
 
-class QuoteViewModel(application: Application) : AndroidViewModel(application) {
+class MainActivity : AppCompatActivity() {
 
-    private val dbHelper = DatabaseHelper(application)
-    val quote = MutableLiveData<String?>()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-    fun loadRandomQuote() {
-        quote.postValue(dbHelper.getRandomQuote())
+        // Initialize DatabaseHelper and use it
+        val dbHelper = DatabaseHelper(this)
+        val randomQuote = dbHelper.getRandomQuote()
+        println("Random Quote: $randomQuote")
     }
 }

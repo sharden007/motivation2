@@ -52,7 +52,7 @@ dependencies {
     implementation(libs.androidx.material3)
 
     // AppCompat Dependency (Fix for Missing AppCompat Reference)
-    implementation("androidx.appcompat:appcompat:1.6.1") // Use the latest stable version
+    implementation(libs.androidx.appcompat)
 
     // Testing Dependencies
     testImplementation(libs.junit)
