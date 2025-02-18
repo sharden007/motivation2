@@ -1,57 +1,43 @@
 package com.example.quote3
 
-import android.database.Cursor
+import android.view.View
 import android.os.Bundle
-import android.view.GestureDetector
-import android.view.MotionEvent
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.inspirationalquotes.DatabaseHelper
+import com.example.quote3.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    // Use ViewBinding for layout inflation
+    private lateinit var binding: ActivityMainBinding
+
+    // Use DatabaseHelper directly to fetch quotes
     private lateinit var dbHelper: DatabaseHelper
-    private lateinit var quoteTextView: TextView
-    private lateinit var instructionTextView: TextView
-    private lateinit var gestureDetector: GestureDetector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        // Initialize views
-        quoteTextView = findViewById(R.id.quoteTextView)
-        instructionTextView = findViewById(R.id.instructionTextView)
-
-        // Set instruction text
-        instructionTextView.text =
-            "Swipe left on the quote to load the next quote. All inspirational quotes provided by Lori Jones-Harden."
-
-        // Initialize database helper
+        // Initialize DatabaseHelper
         dbHelper = DatabaseHelper(this)
 
-        // Load initial random quote
+        // Inflate layout using ViewBinding
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Load a random quote when the activity starts
+        binding.loadingSpinner.visibility = View.VISIBLE // Show loading spinner initially
         loadRandomQuote()
-
-        // Gesture detector for swipe functionality using SwipeGestureListener
-        gestureDetector = GestureDetector(this, object : SwipeGestureListener() {
-            override fun onSwipeLeft() {
-                loadRandomQuote()
-            }
-        })
     }
 
+    /**
+     * Fetches a random quote from the database and updates the UI.
+     */
     private fun loadRandomQuote() {
-        val cursor: Cursor? = dbHelper.getRandomQuote()
-        if (cursor != null && cursor.moveToFirst()) {
-            val quote = cursor.getString(cursor.getColumnIndexOrThrow("quote_text"))
-            quoteTextView.text = quote
-            cursor.close()
-        } else {
-            quoteTextView.text = "No quotes available."
-        }
-    }
+        val randomQuote = dbHelper.getRandomQuote() ?: "No inspirational quotes available."
 
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        return gestureDetector.onTouchEvent(event) || super.onTouchEvent(event)
+        // Update UI with the fetched quote
+        binding.loadingSpinner.visibility = View.GONE // Hide loading spinner
+        binding.quoteText.visibility = View.VISIBLE   // Show quote text
+        binding.quoteText.text = randomQuote          // Display the fetched quote
     }
 }

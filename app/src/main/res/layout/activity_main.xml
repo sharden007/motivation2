@@ -1,29 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background_gradient">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TextView to display the quote -->
-    <TextView
-        android:id="@+id/quoteTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="24sp"
-        android:textColor="#FFFFFF"
-        android:gravity="center"
-        android:text="Your motivational quote will appear here" />
-
-    <!-- TextView for instructions -->
-    <TextView
-        android:id="@+id/instructionTextView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
-        android:textSize="14sp"
-        android:textColor="#FFFFFF"
-        android:gravity="center"
-        android:text="Swipe left on the quote to load the next quote. All inspirational quotes provided by Lori Jones-Harden." />
-</RelativeLayout>
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        tools:context=".MainActivity"
+        android:background="@drawable/background_gradient"> <!-- Background gradient -->
+
+        <!-- CardView for Quote or Loading Spinner -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/quote_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp">
+
+            <!-- Loading Spinner or Quote Text -->
+            <ProgressBar
+                android:id="@+id/loading_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/quote_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:visibility="gone"
+                android.fontFamily="sans-serif-cursive"
+            android:padding="16dp" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Instructional Text -->
+        <TextView
+            android:id="@+id/instruction_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textStyle="italic"
+            android:text="Swipe left on the card to load the next quote. All inspirational quotes provided by Lori Jones-Harden."
+            android:layout_below="@id/quote_card"
+            android:layout_marginTop="16dp" />
+
+    </RelativeLayout>
+</layout>

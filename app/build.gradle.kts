@@ -37,7 +37,12 @@ android {
     }
 
     buildFeatures {
-        compose = true
+        compose = true // Enable Jetpack Compose
+        dataBinding = true // Enable Data Binding
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.3" // Use a compatible Compose Compiler version
     }
 }
 
@@ -45,23 +50,25 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
+
+    // Jetpack Compose BOM (Bill of Materials)
+    implementation(platform("androidx.compose:compose-bom:2024.01.00"))
+
+    // Jetpack Compose Core Libraries
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation(libs.androidx.cardview)
+
+    // Debugging Tools for Compose
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     // AppCompat Dependency (Fix for Missing AppCompat Reference)
-    implementation("androidx.appcompat:appcompat:1.6.1") // Use the latest stable version
+    implementation(libs.androidx.appcompat)
 
     // Testing Dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-
-    // Debugging Dependencies
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
 }
