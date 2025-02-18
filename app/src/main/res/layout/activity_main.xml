@@ -2,28 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradient">
+    android:padding="16dp">
 
-    <!-- TextView to display the quote -->
-    <TextView
-        android:id="@+id/quoteTextView"
+    <!-- Loading Spinner -->
+    <ProgressBar
+        android:id="@+id/loading_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="24sp"
-        android:textColor="#FFFFFF"
-        android:gravity="center"
-        android:text="Your motivational quote will appear here" />
+        android:layout_centerInParent="true" />
 
-    <!-- TextView for instructions -->
+    <!-- Quote Text -->
     <TextView
-        android:id="@+id/instructionTextView"
+        android:id="@+id/quote_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
-        android:textSize="14sp"
-        android:textColor="#FFFFFF"
-        android:gravity="center"
-        android:text="Swipe left on the quote to load the next quote. All inspirational quotes provided by Lori Jones-Harden." />
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:visibility="gone"
+        android:textColor="@android:color/black"
+        android:layout_centerInParent="true" />
+
 </RelativeLayout>

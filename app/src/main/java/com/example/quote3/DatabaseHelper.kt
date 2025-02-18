@@ -1,40 +1,34 @@
-package com.example.quote3
+package com.example.inspirationalquotes
 
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "motivational_quotes", null, 1) {
 
-    companion object {
-        private const val DATABASE_NAME = "motivational_quotes.db"
-        private const val DATABASE_VERSION = 1
-        private const val TABLE_QUOTES = "quotes"
-    }
-
-    override fun onCreate(db: SQLiteDatabase?) {
-        val createTableQuery = """
-            CREATE TABLE $TABLE_QUOTES (
+    override fun onCreate(db: SQLiteDatabase) {
+        db.execSQL(
+            """CREATE TABLE quotes (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                quote_text TEXT NOT NULL
-            )
-        """
-        db?.execSQL(createTableQuery)
-
-        // Insert sample data
-        db?.execSQL("INSERT INTO $TABLE_QUOTES (quote_text) VALUES ('Believe in yourself.')")
-        db?.execSQL("INSERT INTO $TABLE_QUOTES (quote_text) VALUES ('You are stronger than you think.')")
+                text TEXT NOT NULL,
+                category TEXT
+            )"""
+        )
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL("DROP TABLE IF EXISTS $TABLE_QUOTES")
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        db.execSQL("DROP TABLE IF EXISTS quotes")
         onCreate(db)
     }
 
-    // Method to fetch a random quote from the database
-    fun getRandomQuote(): Cursor? {
-        val db = this.readableDatabase
-        return db.rawQuery("SELECT * FROM quotes ORDER BY RANDOM() LIMIT 1", null)
+    fun getRandomQuote(): String? {
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT text FROM quotes ORDER BY RANDOM() LIMIT 1", null)
+        var quote: String? = null
+        if (cursor.moveToFirst()) {
+            quote = cursor.getString(0)
+        }
+        cursor.close()
+        return quote
     }
 }
