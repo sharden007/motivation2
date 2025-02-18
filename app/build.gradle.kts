@@ -58,6 +58,7 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation(libs.androidx.cardview)
 
     // Debugging Tools for Compose
     debugImplementation("androidx.compose.ui:ui-tooling")
