@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient">
+
+    <!-- TextView to display the quote -->
+    <TextView
+        android:id="@+id/quoteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:text="Your motivational quote will appear here" />
+
+    <!-- TextView for instructions -->
+    <TextView
+        android:id="@+id/instructionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:text="Swipe left on the quote to load the next quote. All inspirational quotes provided by Lori Jones-Harden." />
+</RelativeLayout>
