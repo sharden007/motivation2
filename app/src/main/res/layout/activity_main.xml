@@ -8,21 +8,20 @@
         android:layout_height="match_parent"
         android:padding="16dp"
         tools:context=".MainActivity"
-        android:background="@drawable/background_gradient"
-        tools:ignore="ExtraText">
+        android:background="@drawable/background_gradient">
 
         <!-- Title TextView -->
         <TextView
             android:id="@+id/app_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lori's Inspirational Quotes"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:gravity="center"
             android:layout_alignParentTop="true"
-            android:padding="16dp" />
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Lori's Inspirational Quotes"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <!-- CardView for Quote or Loading Spinner -->
         <androidx.cardview.widget.CardView
@@ -61,25 +60,32 @@
         </androidx.cardview.widget.CardView>
 
         <!-- Instructional Text -->
-
-        <!-- Share Button with Icon -->
-
         <TextView
             android:id="@+id/instruction_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/quote_card"
-            android:layout_marginTop="115dp"
-            android:text="Swipe left on the card to load the next quote. All inspirational quotes provided by Lori Jones-Harden."
+            android:textSize="14sp"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="14sp"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            android:text="Swipe left on the card to load the next quote. All inspirational quotes provided by Lori Jones-Harden."
+            android:layout_below="@id/quote_card"
+            android:layout_marginTop="16dp" />
 
+        <!-- Share Icon -->
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="46dp"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_share" />
+            android:id="@+id/share_button_icon"
+            android:layout_width="29dp"
+            android:layout_height="16dp"
+            android:contentDescription="@string/share_button_description"
+            app:srcCompat="@drawable/ic_share"
+            app:tint="@android:color/white"
+            tools:tint="@android:color/white" />
+
+        <!-- Positioning attributes -->
+        android:layout_below="@id/quote_card"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp" />
     </RelativeLayout>
 </layout>
