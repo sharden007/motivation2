@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Inspirational Quotes</string>
+    <string name="share_button_description">Share this quote</string>
 </resources>
