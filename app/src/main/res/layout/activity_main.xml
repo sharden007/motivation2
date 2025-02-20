@@ -11,17 +11,29 @@
         android:background="@drawable/background_gradient">
 
         <!-- Title TextView -->
+        <!-- Title TextView for "Lori's IQ" -->
         <TextView
-            android:id="@+id/app_title"
+            android:id="@+id/app_title_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:gravity="center"
-            android:padding="16dp"
-            android:text="Lori's Inspirational Quotes"
+            android:paddingBottom="4dp"
+            android:text="Lori's IQ"
             android:textColor="@android:color/white"
-            android:textSize="24sp"
+            android:textSize="36sp"
             android:textStyle="bold" />
+
+        <!-- Subtitle TextView for "Inspirational Quotes" -->
+        <TextView
+            android:id="@+id/app_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/app_title_main"
+            android:gravity="center"
+            android:text="(Inspirational Quotes)"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
 
         <!-- CardView for Quote or Loading Spinner -->
         <androidx.cardview.widget.CardView
