@@ -2,25 +2,26 @@ package com.example.quote3
 
 import androidx.appcompat.app.AppCompatActivity
 import com.example.quote3.databinding.ActivityMainBinding
+import com.example.quote3.utils.ShareUtils // Import ShareUtils for sharing functionality
 import com.example.inspirationalquotes.DatabaseHelper
-import androidx.core.view.GestureDetectorCompat
-import androidx.cardview.widget.CardView
 import android.os.Bundle
 import android.view.View
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var dbHelper: DatabaseHelper
+    private lateinit var binding: ActivityMainBinding // Declare binding property
+    private lateinit var dbHelper: DatabaseHelper // Declare DatabaseHelper property
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Initialize DatabaseHelper and ViewBinding
-        dbHelper = DatabaseHelper(this)
+        // Initialize ViewBinding and set the content view
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Initialize DatabaseHelper
+        dbHelper = DatabaseHelper(this)
 
         // Set a random gradient background
         setRandomBackground()
@@ -34,6 +35,16 @@ class MainActivity : AppCompatActivity() {
                 onSwipeLeft = { loadRandomQuote() }
             )
         )
+
+        // Set up click listener for the share button
+        binding.shareButtonIcon.setOnClickListener {
+            val screenshot = ShareUtils.captureScreenshot(this) // Capture screenshot
+            if (screenshot != null) {
+                ShareUtils.shareScreenshot(this, screenshot) // Share screenshot
+            } else {
+                println("Error capturing screenshot") // Log error (optional)
+            }
+        }
     }
 
     /**

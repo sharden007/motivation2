@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <paths>
-        <cache-path name="cache" path="." />
+        <external-cache-path name="shared_cache" path="." />
     </paths>
 
 </PreferenceScreen>
