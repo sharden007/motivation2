@@ -3,12 +3,11 @@ package com.example.quote3
 import androidx.appcompat.app.AppCompatActivity
 import com.example.quote3.databinding.ActivityMainBinding
 import com.example.inspirationalquotes.DatabaseHelper
-
 import androidx.core.view.GestureDetectorCompat
 import androidx.cardview.widget.CardView
-
 import android.os.Bundle
 import android.view.View
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +22,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Set a random gradient background
+        setRandomBackground()
+
         // Load a random quote initially
         loadRandomQuote()
 
@@ -32,6 +34,23 @@ class MainActivity : AppCompatActivity() {
                 onSwipeLeft = { loadRandomQuote() }
             )
         )
+    }
+
+    /**
+     * Sets a random gradient background from a predefined list of gradients.
+     */
+    private fun setRandomBackground() {
+        // Array of gradient resources
+        val gradients = arrayOf(
+            R.drawable.background_gradient_1,
+            R.drawable.background_gradient_2,
+            R.drawable.background_gradient_3,
+            R.drawable.background_gradient_4
+        )
+
+        // Generate a random index and set the background
+        val randomIndex = Random.nextInt(gradients.size)
+        binding.rootLayout.setBackgroundResource(gradients[randomIndex])
     }
 
     /**
