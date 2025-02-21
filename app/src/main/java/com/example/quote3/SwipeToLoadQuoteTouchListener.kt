@@ -35,7 +35,7 @@ class SwipeToLoadQuoteTouchListener(
     }
 
     companion object {
-        private const val SWIPE_THRESHOLD = 100
-        private const val SWIPE_VERTICAL_THRESHOLD = 50
+        private const val SWIPE_THRESHOLD = 50
+        private const val SWIPE_VERTICAL_THRESHOLD = 100
     }
 }

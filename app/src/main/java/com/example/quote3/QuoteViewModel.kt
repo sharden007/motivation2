@@ -1,5 +1,5 @@
 
-package com.example.inspirationalquotes
+package com.example.quote3
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

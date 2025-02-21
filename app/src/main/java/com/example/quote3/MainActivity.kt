@@ -1,11 +1,14 @@
 package com.example.quote3
 
-import androidx.appcompat.app.AppCompatActivity
-import com.example.quote3.databinding.ActivityMainBinding
-import com.example.quote3.utils.ShareUtils // Import ShareUtils for sharing functionality
-import com.example.inspirationalquotes.DatabaseHelper
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.work.*
+import com.example.quote3.DatabaseHelper
+import com.example.quote3.databinding.ActivityMainBinding
+import com.example.quote3.utils.ShareUtils
+import java.util.Calendar
 import android.view.View
+import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -45,6 +48,9 @@ class MainActivity : AppCompatActivity() {
                 println("Error capturing screenshot") // Log error (optional)
             }
         }
+
+        // Schedule the QuoteWorker to send a daily notification with a random quote
+        scheduleDailyQuoteWorker()
     }
 
     /**
@@ -78,5 +84,29 @@ class MainActivity : AppCompatActivity() {
         binding.loadingSpinner.visibility = View.GONE
         binding.quoteText.visibility = View.VISIBLE
         binding.quoteText.text = randomQuote
+    }
+
+    /**
+     * Schedules the QuoteWorker to run once daily at a specific time.
+     */
+    private fun scheduleDailyQuoteWorker() {
+        val currentTime = Calendar.getInstance()
+        val targetTime = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 9) // Set desired hour (e.g., 9 AM)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+        }
+
+        // Calculate initial delay in milliseconds
+        var delay = targetTime.timeInMillis - currentTime.timeInMillis
+        if (delay < 0) {
+            delay += TimeUnit.DAYS.toMillis(1) // Schedule for the next day if time has passed
+        }
+
+        val dailyWorkRequest = OneTimeWorkRequestBuilder<QuoteWorker>()
+            .setInitialDelay(delay, TimeUnit.MILLISECONDS)
+            .build()
+
+        WorkManager.getInstance(applicationContext).enqueue(dailyWorkRequest)
     }
 }

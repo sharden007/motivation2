@@ -1,4 +1,4 @@
-package com.example.inspirationalquotes
+package com.example.quote3
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -23,9 +23,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "motivational
         db.execSQL("INSERT INTO quotes (text, category) VALUES ('Nothing beats a failure but a try.', 'Inspiration')")
         db.execSQL("INSERT INTO quotes (text, category) VALUES ('We have church on Sunday!!!', 'Inspiration')")
         db.execSQL("INSERT INTO quotes (text, category) VALUES ('Whose turn is it to do the dishes?', 'Inspiration')")
-        //db.execSQL("INSERT INTO quotes (text, category) VALUES ('Success is not final, failure is not fatal: It is the courage to continue that counts.', 'Success')")
-        //db.execSQL("INSERT INTO quotes (text, category) VALUES ('Dream big and dare to fail.', 'Dream')")
-        //db.execSQL("INSERT INTO quotes (text, category) VALUES ('Act as if what you do makes a difference. It does.', 'Action')")
 
         Log.d("DatabaseHelper", "Sample data inserted into the database.")
     }
