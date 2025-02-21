@@ -15,7 +15,7 @@ class QuoteWorker(context: Context, workerParams: WorkerParameters) : Worker(con
         val dbHelper = DatabaseHelper(applicationContext)
         val randomQuote = dbHelper.getRandomQuote() ?: "No inspirational quotes available."
 
-        showNotification("Daily Quote", randomQuote)
+        showNotification("Daily Quote From Lori", randomQuote)
 
         return Result.success()
     }

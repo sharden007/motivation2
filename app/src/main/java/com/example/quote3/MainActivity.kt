@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
         val currentTime = Calendar.getInstance()
         val targetTime = Calendar.getInstance().apply {
             set(Calendar.HOUR_OF_DAY, 16) // Set desired hour (e.g., 3 PM)
-            set(Calendar.MINUTE, 1)
+            set(Calendar.MINUTE, 23)
             set(Calendar.SECOND, 0)
         }
 
