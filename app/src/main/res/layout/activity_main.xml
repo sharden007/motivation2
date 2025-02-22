@@ -25,24 +25,32 @@
             tools:tint="@android:color/white" />
 
         <!-- Time Selection Button at the Top-Right Corner -->
-        <Button
-            android:id="@+id/select_time_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Set Time"
-            android:textSize="14sp"
-            android:textColor="@android:color/white"
-            android:backgroundTint="@color/purple_500"
-            android:elevation="4dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true" />
 
         <!-- Title TextView for "Lori's IQ" -->
+        <Button
+            android:id="@+id/select_time_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+
+
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="15dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="@string/select_time_description"
+            android:focusable="true"
+            android:padding="8dp"
+            android:tint="@android:color/white"
+            app:srcCompat="@drawable/ic_settings" />
+
         <TextView
             android:id="@+id/app_title_main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="346dp"
+            android:layout_height="69dp"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
             android:gravity="center"
             android:paddingBottom="4dp"
             android:text="Lori's IQ"
@@ -68,7 +76,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             app:cardCornerRadius="16dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#FFFFFF">
 
             <!-- FrameLayout to enable touch detection -->
             <FrameLayout

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Lori\'s IQ</string>
     <string name="share_button_description">Share this quote</string>
+    <string name="select_time_description">Share this quote</string>
 </resources>
