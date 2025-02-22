@@ -1,10 +1,12 @@
 package com.example.quote3
 
 import android.Manifest
+import android.app.TimePickerDialog
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.work.OneTimeWorkRequestBuilder
@@ -39,25 +41,27 @@ class MainActivity : AppCompatActivity() {
         // Load a random quote initially
         loadRandomQuote()
 
-        // Set up swipe gesture listener on the quote card
+        // Set up swipe gesture listener on the quote card to load a new quote on swipe left
         binding.quoteCardFrame.setOnTouchListener(
             SwipeToLoadQuoteTouchListener(
                 onSwipeLeft = { loadRandomQuote() }
             )
         )
 
-        // Set up click listener for the share button
+        // Set up click listener for the share button to share a screenshot of the quote card
         binding.shareButtonIcon.setOnClickListener {
-            val screenshot = ShareUtils.captureScreenshot(this) // Capture screenshot
+            val screenshot = ShareUtils.captureScreenshot(this) // Capture screenshot of the app UI
             if (screenshot != null) {
-                ShareUtils.shareScreenshot(this, screenshot) // Share screenshot
+                ShareUtils.shareScreenshot(this, screenshot) // Share the captured screenshot via intent
             } else {
-                println("Error capturing screenshot") // Log error (optional)
+                println("Error capturing screenshot") // Log error if screenshot capture fails
             }
         }
 
-        // Schedule the QuoteWorker to send a daily notification with a random quote
-        scheduleDailyQuoteWorker()
+        // Allow user to select time for daily notification using TimePickerDialog
+        binding.selectTimeButton.setOnClickListener {
+            showTimePickerDialog()
+        }
     }
 
     /**
@@ -105,19 +109,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Schedules the QuoteWorker to run once daily at a specific time.
+     * Displays a TimePickerDialog to allow the user to select a time for daily notifications.
      */
-    private fun scheduleDailyQuoteWorker() {
+    private fun showTimePickerDialog() {
+        val currentTime = Calendar.getInstance()
+        val hour = currentTime.get(Calendar.HOUR_OF_DAY)
+        val minute = currentTime.get(Calendar.MINUTE)
+
+        TimePickerDialog(this, { _: TimePicker, selectedHour: Int, selectedMinute: Int ->
+            scheduleDailyQuoteWorker(selectedHour, selectedMinute)
+        }, hour, minute, true).show()
+    }
+
+    /**
+     * Schedules the QuoteWorker to run once daily at the specified time.
+     * @param hourOfDay The hour of day selected by the user.
+     * @param minute The minute of hour selected by the user.
+     */
+    private fun scheduleDailyQuoteWorker(hourOfDay: Int, minute: Int) {
         val currentTime = Calendar.getInstance()
         val targetTime = Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, 16) // Set desired hour (e.g., 3 PM)
-            set(Calendar.MINUTE, 35)
+            set(Calendar.HOUR_OF_DAY, hourOfDay)
+            set(Calendar.MINUTE, minute)
             set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
         }
 
         var delay = targetTime.timeInMillis - currentTime.timeInMillis
         if (delay < 0) {
-            delay += TimeUnit.DAYS.toMillis(1) // Schedule for the next day if time has passed
+            delay += TimeUnit.DAYS.toMillis(1) // Schedule for the next day if time has passed for today
         }
 
         val dailyWorkRequest = OneTimeWorkRequestBuilder<QuoteWorker>()
@@ -125,5 +145,7 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         WorkManager.getInstance(applicationContext).enqueue(dailyWorkRequest)
+
+        println("Notification scheduled at $hourOfDay:$minute")
     }
 }
