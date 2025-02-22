@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Quote3" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- Base application theme -->
+    <style name="Theme.Quote3" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSurface">@android:color/white</item>
+        <item name="colorOnSurface">@android:color/black</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Custom Time Picker Theme -->
+    <style name="CustomTimePickerTheme" parent="ThemeOverlay.MaterialComponents.TimePicker">
+        <!-- Customize the colors for the time picker -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorSurface">@android:color/white</item>
+        <item name="colorOnSurface">@android:color/black</item>
+    </style>
+
 </resources>

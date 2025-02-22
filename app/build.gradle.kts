@@ -52,6 +52,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
 
     implementation("androidx.work:work-runtime-ktx:2.10.0")
+    implementation("com.google.android.material:material:1.9.0")
 
     // Jetpack Compose BOM (Bill of Materials)
     implementation(platform("androidx.compose:compose-bom:2024.01.00"))

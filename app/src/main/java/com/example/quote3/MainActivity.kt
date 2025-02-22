@@ -1,19 +1,19 @@
 package com.example.quote3
 
 import android.Manifest
-import android.app.TimePickerDialog
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.quote3.databinding.ActivityMainBinding
-import com.example.quote3.utils.ShareUtils
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import java.util.Calendar
+import com.example.quote3.utils.ShareUtils
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
@@ -58,9 +58,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Allow user to select time for daily notification using TimePickerDialog
+        // Allow user to select time for daily notification using Material Design Time Picker
         binding.selectTimeButton.setOnClickListener {
-            showTimePickerDialog()
+            showMaterialTimePicker()
         }
     }
 
@@ -109,16 +109,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Displays a TimePickerDialog to allow the user to select a time for daily notifications.
+     * Displays a Material Design Time Picker to allow the user to select a time for daily notifications.
      */
-    private fun showTimePickerDialog() {
-        val currentTime = Calendar.getInstance()
-        val hour = currentTime.get(Calendar.HOUR_OF_DAY)
-        val minute = currentTime.get(Calendar.MINUTE)
+    private fun showMaterialTimePicker() {
+        val picker = MaterialTimePicker.Builder()
+            .setTimeFormat(TimeFormat.CLOCK_12H) // Use 12-hour format; change to CLOCK_24H for 24-hour format.
+            .setHour(9) // Default hour (e.g., 9 AM)
+            .setMinute(0) // Default minute (e.g., 0 minutes past the hour)
+            .setTitleText("Select Notification Time")
+            .setTheme(R.style.CustomTimePickerTheme)
+            .build()
 
-        TimePickerDialog(this, { _: TimePicker, selectedHour: Int, selectedMinute: Int ->
+        picker.show(supportFragmentManager, "MATERIAL_TIME_PICKER")
+
+        picker.addOnPositiveButtonClickListener {
+            val selectedHour = picker.hour
+            val selectedMinute = picker.minute
+
+            // Schedule daily notifications at the selected time.
             scheduleDailyQuoteWorker(selectedHour, selectedMinute)
-        }, hour, minute, true).show()
+        }
     }
 
     /**
@@ -137,7 +147,7 @@ class MainActivity : AppCompatActivity() {
 
         var delay = targetTime.timeInMillis - currentTime.timeInMillis
         if (delay < 0) {
-            delay += TimeUnit.DAYS.toMillis(1) // Schedule for the next day if time has passed for today
+            delay += TimeUnit.DAYS.toMillis(1) // Schedule for the next day if time has passed for today.
         }
 
         val dailyWorkRequest = OneTimeWorkRequestBuilder<QuoteWorker>()
