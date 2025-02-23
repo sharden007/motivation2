@@ -27,30 +27,28 @@
         <!-- Time Selection Button at the Top-Right Corner -->
 
         <!-- Title TextView for "Lori's IQ" -->
-        <Button
+
+        <ImageView
             android:id="@+id/select_time_button"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-
-
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="26dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:contentDescription="@string/select_time_description"
             android:focusable="true"
-            android:padding="8dp"
             android:tint="@android:color/white"
             app:srcCompat="@drawable/ic_settings" />
 
+        <!-- Subtitle TextView for "Inspirational Quotes" -->
         <TextView
             android:id="@+id/app_title_main"
             android:layout_width="346dp"
             android:layout_height="69dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:paddingBottom="4dp"
             android:text="Lori's IQ"
@@ -58,7 +56,6 @@
             android:textSize="36sp"
             android:textStyle="bold" />
 
-        <!-- Subtitle TextView for "Inspirational Quotes" -->
         <TextView
             android:id="@+id/app_subtitle"
             android:layout_width="match_parent"
